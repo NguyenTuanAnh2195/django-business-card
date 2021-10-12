@@ -9,10 +9,12 @@ from django.contrib.auth.models import (
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None, is_staff=False, is_active=True,  **extra_fields):
+    def create_user(
+        self, email, password=None, is_staff=False, is_active=True, **extra_fields
+    ):
         email = UserManager.normalize_email(email)
         user = self.model(
-                email=email, is_active=is_active, is_staff=is_staff, **extra_fields
+            email=email, is_active=is_active, is_staff=is_staff, **extra_fields
         )
 
         if password:
@@ -46,5 +48,4 @@ class User(PermissionsMixin, AbstractBaseUser):
     objects = UserManager()
 
     class Meta:
-        ordering = ("email", )
-
+        ordering = ("email",)
