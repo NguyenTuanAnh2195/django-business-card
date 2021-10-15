@@ -5,8 +5,8 @@ from accounts.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(required=True, write_only=True)
-
+    password = serializers.CharField(required=False, write_only=True)
+    is_staff = serializers.BooleanField(read_only=True)
     class Meta:
         model = User
         fields = [
@@ -21,14 +21,15 @@ class UserSerializer(serializers.ModelSerializer):
             "city",
             "phone_number",
             "profile_picture",
+            "is_staff",
             "password",
         ]
 
 
 class UserSerializationWithToken(serializers.ModelSerializer):
     token = serializers.SerializerMethodField()
-    password = serializers.CharField(required=True, write_only=True)
-
+    password = serializers.CharField(required=False, write_only=True)
+    is_staff = serializers.BooleanField(read_only=True)
     class Meta:
         model = User
         fields = [
@@ -44,6 +45,7 @@ class UserSerializationWithToken(serializers.ModelSerializer):
             "phone_number",
             "profile_picture",
             "password",
+            "is_staff",
             "token",
         ]
 

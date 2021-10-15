@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -39,6 +39,7 @@ class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializationWithToken
     permission_classes = [permissions.IsAdminUser]
+    filter_backends = [filters.OrderingFilter]
     ordering_fields = ["age", "job_title", "employer", "city"]
 
 
@@ -50,12 +51,6 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-        permissions.IsAdminUser,
-        # IsSelfOrAdminOrReadOnly,
+        permissions.IsAuthenticated,
+        IsSelfOrAdminOrReadOnly,
     ]
-
-    def perform_update(self, serializer):
-        instance = serializer.save()
-        instance.set_password(instance.password)
-        instance.save()
