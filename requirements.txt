@@ -41,6 +41,7 @@ placebo==0.10.0
 platformdirs==2.4.0
 pluggy==1.0.0
 psycopg2==2.9.1
+psycopg2-binary==2.9.1
 py==1.10.0
 pycodestyle==2.8.0
 pyflakes==2.4.0
@@ -68,4 +69,5 @@ Werkzeug==0.16.1
 wrapt==1.12.1
 wsgi-request-logger==0.4.6
 zappa==0.54.0
+zappa-django-utils==0.4.1
 zipp==3.6.0
