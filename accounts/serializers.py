@@ -29,6 +29,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UserSerializationWithToken(serializers.ModelSerializer):
     token = serializers.SerializerMethodField()
     password = serializers.CharField(required=False, write_only=True)
+    profile_picture = serializers.ImageField(allow_empty_file=True, required=False)
     is_staff = serializers.BooleanField(read_only=True)
     class Meta:
         model = User
